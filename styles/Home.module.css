@@ -166,3 +166,11 @@ a.secondary {
     filter: invert();
   }
 }
+
+.footer {
+  background-color: aquamarine;
+}
+
+#footer_baru {
+  background-color: aqua;
+}
