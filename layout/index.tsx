@@ -37,6 +37,7 @@ export default function RootLayout({
                         <ul className="flex space-x-4">
                             <li><Link href="/">Home</Link></li>
                             <li><Link href='/about'>About</Link></li>
+                            <li><Link href='/notes/server'>Notes</Link></li>
                         </ul>
                     </div>
                 </header>
