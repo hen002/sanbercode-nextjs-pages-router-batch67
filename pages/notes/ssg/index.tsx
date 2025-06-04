@@ -21,7 +21,7 @@ export const getStaticProps = (async () => {
         (res) => res.json(),
     )
 
-    return { props: { notes } }
+    return { props: { notes }, revalidate: 3 }
 }) satisfies GetStaticProps<{ notes: Notes }>
 
 export default function NotesServerPage({ notes,
