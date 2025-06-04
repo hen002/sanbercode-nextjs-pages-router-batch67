@@ -20,7 +20,7 @@ export const getServerSideProps = (async (context) => {
     const { params } = context
     const notes = await fetch(`https://service.pace11.my.id/api/note/${params?.id || ''}`,
     ).then(
-        (rest) => rest.json(),
+        (res) => res.json(),
     )
 
     return { props: { notes } }

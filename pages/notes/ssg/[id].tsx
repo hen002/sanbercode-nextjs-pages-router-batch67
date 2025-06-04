@@ -1,4 +1,4 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from "next"
+import { GetStaticProps, InferGetStaticPropsType } from "next"
 
 
 type ListNotes = {
@@ -16,18 +16,33 @@ type Notes = {
     data: ListNotes
 }
 
-export const getServerSideProps = (async (context) => {
+export const getStaticPaths = (async () => {
+    const notes = await fetch("https://service.pace11.my.id/api/notes",
+    ).then(
+        (res) => res.json(),
+    )
+    const paths = notes.data.map((note: ListNotes) => ({
+        params: { id: note.id.toString() }, // convert id to string
+    }))
+    return {
+        paths,
+        fallback: 'blocking',
+    }
+
+})
+
+export const getStaticProps = (async (context) => {
     const { params } = context
     const notes = await fetch(`https://service.pace11.my.id/api/note/${params?.id || ''}`,
     ).then(
-        (rest) => rest.json(),
+        (res) => res.json(),
     )
 
     return { props: { notes } }
-}) satisfies GetServerSideProps<{ notes: Notes }>
+}) satisfies GetStaticProps<{ notes: Notes }>
 
 export default function NotesServerPage({ notes,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
     return (
         <div className="p-4 bg-white shadow-sm rounded-lg">
             <h1>{notes.data.title}</h1>

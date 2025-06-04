@@ -18,7 +18,7 @@ type Notes = {
 
 export const getStaticProps = (async () => {
     const notes = await fetch('https://service.pace11.my.id/api/notes').then(
-        (rest) => rest.json(),
+        (res) => res.json(),
     )
 
     return { props: { notes } }
@@ -29,7 +29,7 @@ export default function NotesServerPage({ notes,
     return (
         <div className="grid grid-cols-4 gap-4">
             {notes?.data.map((note: ListNotes) => (
-                <Link href={`/notes/server/${note.id}`} key={note.id} className="p-4 bg-white shadow-sm rounded-lg">
+                <Link href={`/notes/ssg/${note.id}`} key={note.id} className="p-4 bg-white shadow-sm rounded-lg">
                     <h1>{note.title}</h1>
                     <p>{note.description}</p>
                 </Link>

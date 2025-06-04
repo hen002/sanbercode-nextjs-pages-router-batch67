@@ -18,7 +18,7 @@ type Notes = {
 
 export const getServerSideProps = (async () => {
     const notes = await fetch('https://service.pace11.my.id/api/notes').then(
-        (rest) => rest.json(),
+        (res) => res.json(),
     )
 
     return { props: { notes } }
